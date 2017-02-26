@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+xmlns:android="http://schemas.android.com/apk/res/android"
+           id="ru.apps-m.curl"
+      version="0.1.0">
+    <name>Curl</name>
+    <description>Wrapper for native Curl</description>
+    <license>MIT</license>
+    <repo>https://github.com/apps-m/curl-cordova.git</repo>
+    <issue>https://github.com/apps-m/curl-cordova/issues</issue>
+
+    <engines>
+        <engine name="cordova-android" version=">=4.0.0-dev" />
+    </engines>
+
+    <js-module src="www/curl.js" name="curl">
+        <clobbers target="curl"/>
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Curl">
+                <param name="android-package" value="ru.appsm.curl.CordovaWrapper"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <framework src="curl.gradle" custom="true" type="gradleReference" />
+        <source-file src="src/android/CordovaWrapper.java" target-dir="src/ru/appsm/curl" />
+        <source-file src="src/android/Result.java" target-dir="src/ru/appsm/curl" />
+
+        <source-file src="src/android/Android.mk" target-dir="jni" />
+        <source-file src="src/android/Application.mk" target-dir="jni" />
+        <source-file src="src/android/testlibrary.cpp" target-dir="jni" />
+        <source-file src="src/android/testlibrary.h" target-dir="jni" />
+        <source-file src="src/android/jniLibsCurl/" target-dir="jni"/>
+        <source-file src="src/android/jniLibsCurl/include/curl/" target-dir="jni/"/>
+    </platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Curl">
+                <param name="ios-package" value="CDVCurl" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVCurl.h"/>
+        <source-file src="src/ios/CDVCurl.m"/>
+
+        <framework src="Security.framework"/>
+        <framework src="libz.dylib" />
+
+        <source-file src="src/ios/libcurl.a" framework="true" />
+        <header-file src="src/ios/curl/curl.h" />
+        <header-file src="src/ios/curl/curlbuild.h" />
+        <header-file src="src/ios/curl/curlrules.h" />
+        <header-file src="src/ios/curl/curlver.h" />
+        <header-file src="src/ios/curl/easy.h" />
+        <header-file src="src/ios/curl/mprintf.h" />
+        <header-file src="src/ios/curl/multi.h" />
+        <header-file src="src/ios/curl/stdcheaders.h" />
+        <header-file src="src/ios/curl/typecheck-gcc.h" />
+
+    </platform>
+</plugin>
