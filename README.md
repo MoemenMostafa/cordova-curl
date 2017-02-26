@@ -10,7 +10,7 @@ To repair http://stackoverflow.com/questions/25253823/how-to-make-ssl-peer-verif
  --------------------------------------------------------------------------------  
 ## Installation:
 ```bash
-  cordova plugin add https://github.com/mnill/cordova-curl
+  cordova plugin add https://github.com/MoemenMostafa/cordova-curl
 ```
 
 ### Android
