@@ -33,7 +33,7 @@ Three methods are there:
  
 ### Examples:
 
-curl.query(['https://ru.wikipedia.org/api/', ['Accept: text/plain', 'Host: ru.wikipedia.org'], null, true, "cookie"], function(answer){alert(answer[0], answer[1])}, function(){alert('fail')});
+curl.query(['https://ru.wikipedia.org/api/', ['Accept: text/plain', 'Host: ru.wikipedia.org'], null, false, "cookie"], function(answer){alert(answer[0], answer[1])}, function(){alert('fail')});
 
 curl.reset(function(){alert('cookies deted')}, function(){alert('fail to delete cookies')});
 
