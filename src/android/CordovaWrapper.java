@@ -62,7 +62,6 @@ public class CordovaWrapper extends CordovaPlugin {
                     Result content = downloadUrl(url, headers, fPostData != null ? 1 : 0, fPostData != null ? fPostData : emptyByte, fFollowLocation ? 1 : 0, cacheFile.getAbsolutePath());
                     String contentString = content == null ? null : new String(content.content);
                     if (contentString != null) {
-                        Log.i(TAG, contentString);
                         JSONArray result = new JSONArray();
                         result.put(contentString.substring(content.headersLength, contentString.length()));
                         result.put(contentString.substring(0, content.headersLength));
