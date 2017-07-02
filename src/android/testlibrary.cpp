@@ -12,21 +12,12 @@
 	#endif	
 #endif
 
-#ifdef ANDROID
-	#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "testlibrary", __VA_ARGS__))
-#else
-	#define LOGI(...) printf(__VA_ARGS__)
-#endif
-
 size_t curlCallback(char *data, size_t size, size_t count, void* userdata);
 
 BOOL downloadUrl(const char* url, struct curl_slist* list, bool isPost, const char* postCharData, bool forward, long* header_size, const char* cookieFile, LPCURL_DOWNLOAD_OBJECT downloadObject ) {
 	CURL* curl = curl_easy_init();
 
 	curl_easy_setopt(curl, CURLOPT_URL, url);
-
-//	curl_easy_setopt(curl, CURLOPT_PROXY, "10.0.0.30");
-//	curl_easy_setopt(curl, CURLOPT_PROXYPORT, 8888);
 
 	curl_easy_setopt(curl, CURLOPT_HTTPHEADER, list);
 
@@ -38,7 +29,6 @@ BOOL downloadUrl(const char* url, struct curl_slist* list, bool isPost, const ch
 	curl_easy_setopt(curl, CURLOPT_COOKIEJAR, cookieFile);
 
 	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, forward);
-	//curl_easy_setopt(curl, CURLOPT_FAILONERROR, TRUE);
 
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &curlCallback);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, downloadObject);
@@ -50,16 +40,12 @@ BOOL downloadUrl(const char* url, struct curl_slist* list, bool isPost, const ch
 
 	CURLcode res = curl_easy_perform(curl);
 
-	if (res != CURLE_OK){
-	    LOGI("failed with error code %d", res);
-	}
 	curl_easy_getinfo(curl, CURLINFO_HEADER_SIZE, header_size);
 	curl_easy_cleanup(curl);
 	return res == CURLE_OK;
 }
 
 size_t curlCallback(char *data, size_t size, size_t count, void* userdata) {
-//	LOGI("Downloaded data size is " SIZE_T_TYPE, size*count);
 
     LPCURL_DOWNLOAD_OBJECT downloadObject = (LPCURL_DOWNLOAD_OBJECT) userdata;
     long newSize = 0;
@@ -116,19 +102,10 @@ extern "C"
 		jboolean isCopy;
         const char* postCharData = env->GetStringUTFChars(postData, 0);
         
-        
-//		if(isCopy)
-//		{
-//		   env->ReleaseByteArrayElements(postData, (jbyte*)postCharData, JNI_ABORT);
-//		}
-
-        LOGI("postCharData %s", postCharData);
-
 		struct curl_slist *list = NULL;
 
 		for(int i=0; i<headers_len; ++i) {
             jstring string = (jstring) env->GetObjectArrayElement(headers, i);
-//            LOGI("Header %s", env->GetStringUTFChars(string, 0));
             list = curl_slist_append(list, env->GetStringUTFChars(string, 0));
         }
 
