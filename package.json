@@ -1,5 +1,5 @@
 {
-  "name": "Cordova Curl",
+  "name": "cordova_curl",
   "version": "0.1.0",
   "description": "Wrapper for native Curl",
   "cordova": {
