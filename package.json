@@ -1,0 +1,31 @@
+{
+  "name": "Cordova Curl",
+  "version": "0.1.0",
+  "description": "Wrapper for native Curl",
+  "cordova": {
+    "id": "ru.apps-m.curl",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": "https://github.com/MoemenMostafa/cordova-curl.git",
+  "keywords": [
+    "Curl",
+    "Raw request",
+    "POST",
+    "GET",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "author": "Moemen Mostafa",
+  "license": "MIT",
+  "homepage": "https://github.com/MoemenMostafa/cordova-curl"
+}
