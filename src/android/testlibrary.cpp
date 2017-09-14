@@ -1,5 +1,5 @@
 #include "testlibrary.h"
-
+#include <stdlib.h> // Fix compitablity in some NDK versions
 #include <curl/curl.h>
 
 #ifdef ANDROID
